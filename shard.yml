@@ -1,0 +1,7 @@
+name: personal_blog
+version: 0.1.0
+crystal: 1.21.0
+
+targets:
+  build:
+    main: src/build.cr

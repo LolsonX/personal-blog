@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= site_name %> is getting ready.">
+  <title><%= site_name %></title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      background: #0c1117;
+      color: #e6edf3;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background:
+        linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px),
+        #0c1117;
+      background-size: 32px 32px;
+    }
+
+    main {
+      width: min(42rem, 100%);
+      border-left: 3px solid #ff7a18;
+      padding: 1rem 0 1rem 1.5rem;
+    }
+
+    p { margin: 0 0 .75rem; color: #8b949e; }
+    h1 { margin: 0; font-size: clamp(2rem, 8vw, 5rem); letter-spacing: -.08em; }
+    .status { margin-top: 2rem; color: #ffb86c; }
+    .status::before { content: "> "; color: #3fb950; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Crystal / online</p>
+    <h1><%= site_name %></h1>
+    <p class="status"><%= status %></p>
+  </main>
+</body>
+</html>
