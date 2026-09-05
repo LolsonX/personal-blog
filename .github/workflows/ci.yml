@@ -24,6 +24,7 @@ jobs:
         env:
           GIT_SHA: test
         run: |
+          shards install
           crystal tool format --check
           crystal build --release src/app.cr -o bin/app
           HOST=127.0.0.1 PORT=3100 GIT_SHA=test bin/app > /tmp/app.log 2>&1 &
