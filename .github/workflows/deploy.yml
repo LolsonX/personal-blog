@@ -36,6 +36,7 @@ jobs:
         run: |
           shards install
           crystal tool format --check
+          mkdir -p bin
           crystal build --release src/app.cr -o bin/app
           test -x bin/app
 
