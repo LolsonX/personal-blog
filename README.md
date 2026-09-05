@@ -2,7 +2,15 @@
 
 Crystal-built static site deployed to [core-code.net](https://core-code.net).
 
-## Local build
+## Local server
+
+```sh
+shards install
+crystal run src/app.cr
+open http://localhost:3000
+```
+
+## Static build
 
 ```sh
 crystal run src/build.cr

@@ -3,5 +3,12 @@ version: 0.1.0
 crystal: 1.21.0
 
 targets:
+  app:
+    main: src/app.cr
   build:
     main: src/build.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    version: ~> 1.13.0
