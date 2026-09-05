@@ -20,9 +20,18 @@ jobs:
         with:
           crystal: 1.21.0
 
-      - name: Build
+      - name: Build and smoke test
+        env:
+          GIT_SHA: test
         run: |
           crystal tool format --check
-          crystal run --release src/build.cr
-          test -s public/index.html
-          grep -q '<h1>core-code.net</h1>' public/index.html
+          crystal build --release src/app.cr -o bin/app
+          HOST=127.0.0.1 PORT=3100 GIT_SHA=test bin/app > /tmp/app.log 2>&1 &
+          pid=$!
+          trap 'kill $pid 2>/dev/null' EXIT
+          for _ in $(seq 1 30); do
+            curl --fail --silent http://127.0.0.1:3100/deployment > /dev/null && break
+            sleep 1
+          done
+          test "$(curl --fail --silent http://127.0.0.1:3100/deployment)" = "test"
+          curl --fail --silent http://127.0.0.1:3100/ | grep -q '<h1>core-code.net</h1>'

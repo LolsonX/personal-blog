@@ -1,6 +1,6 @@
 # personal-blog
 
-Crystal-built static site deployed to [core-code.net](https://core-code.net).
+Crystal and Kemal site deployed to [core-code.net](https://core-code.net).
 
 ## Local server
 
@@ -10,11 +10,11 @@ crystal run src/app.cr
 open http://localhost:3000
 ```
 
-## Static build
+## Production build
 
 ```sh
-crystal run src/build.cr
-open public/index.html
+GIT_SHA=local crystal build --release src/app.cr -o bin/app
 ```
 
-Pushes to `main` build with Crystal 1.21.0 and deploy through GitHub Actions.
+Pushes to `main` build with Crystal 1.21.0, restart the `personal-blog`
+systemd unit, and verify `/deployment` through GitHub Actions.

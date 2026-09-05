@@ -31,13 +31,12 @@ jobs:
           crystal: 1.21.0
 
       - name: Build
+        env:
+          GIT_SHA: ${{ github.sha }}
         run: |
           crystal tool format --check
-          crystal run --release src/build.cr
-          test -s public/index.html
-          grep -q '<h1>core-code.net</h1>' public/index.html
-          mkdir -p public/.well-known
-          printf '%s\n' "$GITHUB_SHA" > public/.well-known/deployment
+          crystal build --release src/app.cr -o bin/app
+          test -x bin/app
 
       - name: Configure SSH
         env:
@@ -55,16 +54,20 @@ jobs:
         env:
           DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
           DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PATH: /srv/www/core-code.net
+          SSH_OPTS: -i ~/.ssh/id_ed25519 -o BatchMode=yes -o ConnectTimeout=10 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts
         run: |
           test -n "$DEPLOY_HOST"
           test -n "$DEPLOY_USER"
-          rsync -rlvz --delete-delay --delay-updates --chmod=D755,F644 \
-            -e "ssh -i ~/.ssh/id_ed25519 -o BatchMode=yes -o ConnectTimeout=10 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts" \
-            public/ "$DEPLOY_USER@$DEPLOY_HOST:/"
+          set -e
+          rsync -q --chmod=F755 -e "ssh $SSH_OPTS" \
+            bin/app "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/app.new"
+          ssh $SSH_OPTS "$DEPLOY_USER@$DEPLOY_HOST" \
+            "mv -f $DEPLOY_PATH/app.new $DEPLOY_PATH/app && systemctl restart personal-blog"
 
       - name: Verify
         env:
           DEPLOY_URL: https://core-code.net
         run: |
-          deployed_sha="$(curl --fail --silent --show-error --retry 5 --retry-all-errors --retry-delay 2 "$DEPLOY_URL/.well-known/deployment")"
+          deployed_sha="$(curl --fail --silent --show-error --retry 30 --retry-all-errors --retry-delay 2 "$DEPLOY_URL/deployment")"
           test "$deployed_sha" = "$GITHUB_SHA"
