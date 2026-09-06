@@ -86,7 +86,7 @@ jobs:
           rsync -q --chmod=F755 -e "ssh $SSH_OPTS" \
             bin/app "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/app.new"
           ssh $SSH_OPTS "$DEPLOY_USER@$DEPLOY_HOST" \
-            "mv -f $DEPLOY_PATH/core-code.env.tmp $DEPLOY_PATH/core-code.env && mv -f $DEPLOY_PATH/app.new $DEPLOY_PATH/app && systemctl restart personal-blog"
+            "mv -f $DEPLOY_PATH/core-code.env.tmp $DEPLOY_PATH/core-code.env && mv -f $DEPLOY_PATH/app.new $DEPLOY_PATH/app && sudo systemctl restart personal-blog"
 
       - name: Verify
         env:
