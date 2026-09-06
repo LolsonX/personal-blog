@@ -1,5 +1,6 @@
 require "kemal"
 require "ecr"
+require "./database"
 
 SITE_NAME    = "core-code.net"
 STATUS       = "portfolio and projects deploying soon"
@@ -21,6 +22,15 @@ get "/deployment" do
   DEPLOYED_SHA
 end
 
+get "/health" do |env|
+  if Database.healthy?
+    "ok"
+  else
+    halt env, status_code: 503, response: "database unavailable"
+  end
+end
+
+Database.connection
 Kemal.config.host_binding = ENV.fetch("HOST", "0.0.0.0")
 Kemal.config.port = ENV.fetch("PORT", "3000").to_i
 Kemal.run
