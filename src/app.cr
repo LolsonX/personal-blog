@@ -16,6 +16,7 @@ require "./publishing/markdown_renderer"
 require "./views"
 
 DEPLOYED_SHA = ({{ env("GIT_SHA") }} || ENV.fetch("GIT_SHA", "local"))
+FAVICON      = {{ read_file("src/favicon.svg") }}
 STYLESHEET   = {{ read_file("src/styles/tokens.css") + "\n" + read_file("src/styles/base.css") + "\n" + read_file("src/styles/layout.css") + "\n" + read_file("src/styles/components/header.css") + "\n" + read_file("src/styles/components/hero.css") + "\n" + read_file("src/styles/components/profile-note.css") + "\n" + read_file("src/styles/components/topics.css") + "\n" + read_file("src/styles/components/latest-writing.css") + "\n" + read_file("src/styles/components/post.css") + "\n" + read_file("src/styles/components/admin.css") + "\n" + read_file("src/styles/components/footer.css") + "\n" + read_file("src/styles/responsive.css") + "\n" + read_file("src/styles/themes.css") }}
 
 database = Database.connection
@@ -210,6 +211,12 @@ get "/styles.css" do |env|
   env.response.content_type = "text/css; charset=utf-8"
   env.response.headers["Cache-Control"] = "no-store"
   STYLESHEET
+end
+
+get "/favicon.svg" do |env|
+  env.response.content_type = "image/svg+xml; charset=utf-8"
+  env.response.headers["Cache-Control"] = "public, max-age=86400"
+  FAVICON
 end
 
 get "/deployment" do
