@@ -28,6 +28,7 @@ jobs:
       SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
       EDITOR_USERNAME: ${{ secrets.EDITOR_USERNAME }}
       EDITOR_PASSWORD_HASH: ${{ secrets.EDITOR_PASSWORD_HASH }}
+      COOKIE_SECURE: "true"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -36,6 +37,16 @@ jobs:
       - uses: crystal-lang/install-crystal@d8ef131ecec0352ce0e39b81b0a6d95def58fe2f # v1.9.2
         with:
           crystal: 1.21.0
+
+      - name: Validate editor configuration
+        run: |
+          set -euo pipefail
+          test -n "$SESSION_SECRET"
+          test "${#SESSION_SECRET}" -ge 32
+          test -n "$EDITOR_USERNAME"
+          test "$EDITOR_USERNAME" != "change-me"
+          [[ "$EDITOR_PASSWORD_HASH" =~ ^\$2[aby]\$[0-9]{2}\$[./A-Za-z0-9]{53}$ ]]
+          test "$COOKIE_SECURE" = "true"
 
       - name: Build
         env:

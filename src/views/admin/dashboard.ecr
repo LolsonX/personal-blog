@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publishing — core-code.net</title>
+  <link rel="stylesheet" href="/styles.css?v=publishing-admin-2">
+</head>
+<body class="admin-body">
+  <main class="admin-main">
+    <header class="admin-header">
+      <a class="admin-brand" href="/">core-code.net <span>/ editor</span></a>
+      <form method="post" action="/admin/logout">
+        <input type="hidden" name="csrf_token" value="<%= safe_csrf_token %>">
+        <button class="admin-link-button" type="submit">Sign out</button>
+      </form>
+    </header>
+    <div class="admin-title-row">
+      <div><p class="admin-kicker">Publishing</p><h1>Writing</h1></div>
+      <a class="admin-button" href="/admin/posts/new">New post <span>↗</span></a>
+    </div>
+    <% if safe_posts.empty? %>
+      <p class="admin-empty">No posts yet. Start with a new draft.</p>
+    <% else %>
+      <div class="admin-post-list">
+        <% safe_posts.each do |post| %>
+          <article class="admin-post-row">
+            <div><span class="admin-status admin-status--<%= post[:status].downcase %>"><%= post[:status] %></span><h2><a href="/admin/posts/<%= post[:id] %>/edit"><%= post[:title] %></a></h2><p>/<%= post[:slug] %></p></div>
+            <time><%= post[:updated] %></time>
+          </article>
+        <% end %>
+      </div>
+    <% end %>
+  </main>
+</body>
+</html>

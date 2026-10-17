@@ -30,25 +30,25 @@ module Views
       String.build { |io| ECR.embed "src/views/components/topic_entry.ecr", io }
     end
 
-    def self.latest_writing(posts : Array(Publishing::PublishedPost)) : String
+    def self.latest_writing(posts : Array(Publishing::Post)) : String
       safe_empty_title = HTML.escape(SiteContent::FIRST_POST_TITLE)
       safe_empty_description = HTML.escape(SiteContent::FIRST_POST_DESCRIPTION)
-      safe_posts = posts.map do |post|
+      safe_posts = posts.select(&.published?).map do |post|
         {
           title:      HTML.escape(post.title),
           slug:       HTML.escape(post.slug),
           summary:    HTML.escape(post.summary),
-          published:  HTML.escape(post.first_published_at.to_s("%B %-d, %Y")),
+          published:  HTML.escape(post.first_published_at.not_nil!.to_s("%B %-d, %Y")),
           categories: post.categories.map { |category| HTML.escape(category.name) }.join(" · "),
         }
       end
       String.build { |io| ECR.embed "src/views/components/latest_writing.ecr", io }
     end
 
-    def self.post_detail(post : Publishing::PublishedPost) : String
+    def self.post_detail(post : Publishing::Post) : String
       safe_title = HTML.escape(post.title)
       safe_summary = HTML.escape(post.summary)
-      safe_published = HTML.escape(post.first_published_at.to_s("%B %-d, %Y"))
+      safe_published = HTML.escape(post.first_published_at.not_nil!.to_s("%B %-d, %Y"))
       safe_categories = post.categories.map { |category| HTML.escape(category.name) }
       rendered_body = Publishing::MarkdownRenderer.render(post.body_markdown)
       String.build { |io| ECR.embed "src/views/components/post_detail.ecr", io }
@@ -65,7 +65,7 @@ module Views
     end
   end
 
-  def self.render_home(posts : Array(Publishing::PublishedPost)) : String
+  def self.render_home(posts : Array(Publishing::Post)) : String
     title = "#{SiteContent::AUTHOR_NAME} (@#{SiteContent::HANDLE}) — #{SiteContent::NAME}"
     description = SiteContent::DESCRIPTION
 
@@ -80,7 +80,7 @@ module Views
     render_layout(title, description, content_html)
   end
 
-  def self.render_post(post : Publishing::PublishedPost) : String
+  def self.render_post(post : Publishing::Post) : String
     title = "#{post.title} — #{SiteContent::NAME}"
     description = post.summary.empty? ? SiteContent::DESCRIPTION : post.summary
     header_html = Components.header(SiteContent::GITHUB_URL, SiteContent::TWITCH_URL)

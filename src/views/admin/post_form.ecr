@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= post_id ? "Edit post" : "New post" %> — core-code.net</title>
+  <link rel="stylesheet" href="/styles.css?v=publishing-admin-2">
+</head>
+<body class="admin-body">
+  <main class="admin-main admin-main--form">
+    <header class="admin-form-nav">
+      <a class="admin-brand" href="/">core-code.net <span>/ editor</span></a>
+      <a class="admin-button admin-button--quiet admin-back-link" href="/admin"><span aria-hidden="true">←</span> Back to list</a>
+    </header>
+    <p class="admin-kicker"><a href="/admin">Writing</a> <span>/</span> <%= post_id ? "Edit post" : "New post" %></p>
+    <h1><%= post_id ? "Edit post" : "New post" %></h1>
+    <% if safe_notice %><p class="admin-notice" role="status" aria-live="polite"><%= safe_notice %></p><% end %>
+    <% if safe_error %><p class="admin-error"><%= safe_error %></p><% end %>
+    <form method="post" action="<%= form_action %>" class="admin-form">
+      <input type="hidden" name="csrf_token" value="<%= safe_csrf_token %>">
+      <label>Title<input name="title" value="<%= safe_title %>" maxlength="180" required></label>
+      <label>Slug<input name="slug" value="<%= safe_slug %>" pattern="[a-z0-9]+(-[a-z0-9]+)*" <%= slug_locked ? "readonly" : "required" %>><% if slug_locked %><small>Locked after first publication.</small><% end %></label>
+      <label>Summary<textarea name="summary" rows="3" maxlength="320"><%= safe_summary %></textarea></label>
+      <label>Body <span class="admin-label-note">Markdown</span><textarea class="admin-markdown-input" name="body_markdown" rows="20"><%= safe_body %></textarea></label>
+      <fieldset><legend>Categories</legend>
+        <% categories_for_form.each do |category| %>
+          <label class="admin-checkbox"><input type="checkbox" name="category_ids" value="<%= category[:id] %>" <%= category[:checked] ? "checked" : "" %>><%= category[:name] %></label>
+        <% end %>
+      </fieldset>
+      <div class="admin-form-actions">
+        <button class="admin-button admin-button--quiet" type="submit" name="save" value="draft"><%= submit_label %></button>
+        <% unless post.try(&.published?) %><button class="admin-button" type="submit" name="publish" value="true">Publish <span>↗</span></button><% end %>
+        <% if post && post.draft? %>
+          <button class="admin-delete" type="submit" form="delete-post">Delete draft</button>
+        <% end %>
+      </div>
+    </form>
+    <% if post && post.draft? %>
+      <form id="delete-post" method="post" action="/admin/posts/<%= post.id %>/delete" onsubmit="return confirm('Permanently delete this draft?')">
+        <input type="hidden" name="csrf_token" value="<%= safe_csrf_token %>">
+      </form>
+    <% end %>
+  </main>
+</body>
+</html>

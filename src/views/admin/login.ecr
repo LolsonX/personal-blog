@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editor sign in — core-code.net</title>
+  <link rel="stylesheet" href="/styles.css?v=publishing-admin-2">
+</head>
+<body class="admin-body">
+  <main class="admin-main admin-main--login">
+    <a class="admin-brand" href="/">core-code.net <span>/ editor</span></a>
+    <h1>Sign in</h1>
+    <% if safe_error %><p class="admin-error"><%= safe_error %></p><% end %>
+    <form method="post" action="/admin/login" class="admin-form">
+      <input type="hidden" name="csrf_token" value="<%= safe_csrf_token %>">
+      <label>Username<input name="username" autocomplete="username" required autofocus></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="admin-button" type="submit">Sign in</button>
+    </form>
+  </main>
+</body>
+</html>
