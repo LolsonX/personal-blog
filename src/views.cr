@@ -31,8 +31,12 @@ module Views
     end
 
     def self.latest_writing(posts : Array(Publishing::Post)) : String
-      safe_empty_title = HTML.escape(SiteContent::FIRST_POST_TITLE)
-      safe_empty_description = HTML.escape(SiteContent::FIRST_POST_DESCRIPTION)
+      writing_list(posts, SiteContent::FIRST_POST_TITLE, SiteContent::FIRST_POST_DESCRIPTION, true)
+    end
+
+    def self.writing_list(posts : Array(Publishing::Post), empty_title : String, empty_description : String, archive_link : Bool = false) : String
+      safe_empty_title = HTML.escape(empty_title)
+      safe_empty_description = HTML.escape(empty_description)
       safe_posts = posts.select(&.published?).map do |post|
         {
           title:      HTML.escape(post.title),
@@ -42,6 +46,7 @@ module Views
           categories: post.categories.map { |category| HTML.escape(category.name) }.join(" · "),
         }
       end
+      show_archive_link = archive_link && !safe_posts.empty?
       String.build { |io| ECR.embed "src/views/components/latest_writing.ecr", io }
     end
 
@@ -87,6 +92,17 @@ module Views
     post_html = Components.post_detail(post)
     footer_html = Components.footer(SiteContent::AUTHOR_NAME, SiteContent::NAME, SiteContent::EMAIL, SiteContent::GITHUB_URL, SiteContent::TWITCH_URL)
     content_html = String.build { |io| ECR.embed "src/views/post.ecr", io }
+    render_layout(title, description, content_html)
+  end
+
+  def self.render_writing_archive(page : Publishing::ArchivePage) : String
+    title = "Writing — #{SiteContent::NAME}"
+    description = "All published notes on software development, Ruby, Crystal, games, and things worth exploring."
+    header_html = Components.header(SiteContent::GITHUB_URL, SiteContent::TWITCH_URL)
+    writing_list_html = Components.writing_list(page.posts, "No posts yet", "There is nothing in the notebook just yet.")
+    next_page_url = page.next_cursor.try { |cursor| "/writing?cursor=#{HTML.escape(cursor)}" }
+    footer_html = Components.footer(SiteContent::AUTHOR_NAME, SiteContent::NAME, SiteContent::EMAIL, SiteContent::GITHUB_URL, SiteContent::TWITCH_URL)
+    content_html = String.build { |io| ECR.embed "src/views/writing_archive.ecr", io }
     render_layout(title, description, content_html)
   end
 

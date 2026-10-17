@@ -32,6 +32,22 @@ module Publishing
         )
       end
 
+      def published_page(limit : Int32, before : Application::PublishedPostCursor?) : Array(Application::PostRow)
+        if cursor = before
+          @database.query_all(
+            "SELECT id, title, slug, summary, body_markdown, status, first_published_at, slug_frozen, created_at, updated_at FROM posts WHERE status = 'published' AND (first_published_at < ? OR (first_published_at = ? AND id < ?)) ORDER BY first_published_at DESC, id DESC LIMIT ?",
+            cursor[:published_at], cursor[:published_at], cursor[:id], limit,
+            as: POST_ROW
+          )
+        else
+          @database.query_all(
+            "SELECT id, title, slug, summary, body_markdown, status, first_published_at, slug_frozen, created_at, updated_at FROM posts WHERE status = 'published' ORDER BY first_published_at DESC, id DESC LIMIT ?",
+            limit,
+            as: POST_ROW
+          )
+        end
+      end
+
       def find_published(slug : String) : Application::PostRow?
         @database.query_one?(
           "SELECT id, title, slug, summary, body_markdown, status, first_published_at, slug_frozen, created_at, updated_at FROM posts WHERE status = 'published' AND slug = ? LIMIT 1",

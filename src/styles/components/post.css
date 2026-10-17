@@ -19,3 +19,11 @@
 .post-content code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
 .post-content :not(pre) > code { padding: .12em .32em; border: 1px solid var(--color-line); background: rgba(255, 255, 255, .04); }
 .post-content img { display: block; max-width: 100%; height: auto; }
+.journal-main--archive { padding-top: clamp(60px, 9vw, 112px); }
+.writing-archive { max-width: 780px; margin-inline: auto; }
+.writing-archive > .eyebrow { margin-bottom: 20px; }
+.writing-archive > .display-heading { font-size: clamp(2.4rem, 4.6vw, 3.75rem); }
+.writing-archive__intro { margin: 19px 0 36px; color: var(--color-muted); font-size: 1.02rem; line-height: 1.7; }
+.archive-pagination { display: flex; justify-content: flex-end; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--color-line); }
+.archive-pagination__next { color: var(--color-accent); font-size: .86rem; text-decoration: none; }
+.archive-pagination__next span { margin-left: 8px; }

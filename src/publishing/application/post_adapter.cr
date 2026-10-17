@@ -13,10 +13,12 @@ module Publishing
       updated_at: Int64)
 
     alias CategoryRow = NamedTuple(id: Int64, name: String, slug: String)
+    alias PublishedPostCursor = NamedTuple(published_at: Int64, id: Int64)
 
     # Storage adapter port. Adapters translate these operations to their database.
     abstract class PostAdapter
       abstract def posts : Array(PostRow)
+      abstract def published_page(limit : Int32, before : PublishedPostCursor?) : Array(PostRow)
       abstract def latest_published(limit : Int32) : Array(PostRow)
       abstract def find_published(slug : String) : PostRow?
       abstract def find_post(id : Int64) : PostRow?

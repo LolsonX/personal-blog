@@ -50,6 +50,10 @@ module Publishing
         @adapter.latest_published(limit).map { |row| build_post(row) }
       end
 
+      def published_page(limit : Int32, before : PublishedPostCursor?) : Array(Post)
+        @adapter.published_page(limit, before).map { |row| build_post(row) }
+      end
+
       def find_published(slug : String) : Post?
         @adapter.find_published(slug).try { |row| build_post(row) }
       end

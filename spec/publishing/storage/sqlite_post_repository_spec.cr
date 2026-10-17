@@ -34,6 +34,10 @@ describe Publishing::Storage::SQLitePostAdapter do
       posts.first.should be_a(Publishing::Post)
       posts.first.categories.map(&.slug).should eq(["programming"])
       repository.find_published("private-draft").should be_nil
+
+      archive = Publishing::PublicPosts.new(repository).archive
+      archive.posts.map(&.slug).should eq(["a-published-note"])
+      archive.next_cursor.should be_nil
     ensure
       database.close
     end
@@ -80,6 +84,35 @@ describe Publishing::Storage::SQLitePostAdapter do
       another_draft = manager.create("Disposable", "disposable", "", "", [] of Int64, false)
       manager.delete_draft(another_draft.id).should be_true
       repository.find(another_draft.id).should be_nil
+    ensure
+      database.close
+    end
+  end
+
+  it "paginates the public archive without repeating posts" do
+    database = publishing_test_database
+    begin
+      Publishing::Storage::Migrations.apply(database)
+      repository = Publishing::Application::PostRepository.new(Publishing::Storage::SQLitePostAdapter.new(database))
+      manager = Publishing::Application::ManagePosts.new(repository)
+      public_posts = Publishing::PublicPosts.new(repository)
+
+      3.times do |index|
+        manager.create("Archive note #{index}", "archive-note-#{index}", "", "", [] of Int64, true)
+      end
+
+      first_page = public_posts.archive(limit: 2)
+      first_page.posts.size.should eq(2)
+      cursor = first_page.next_cursor.not_nil!
+
+      second_page = public_posts.archive(cursor, limit: 2)
+      second_page.posts.size.should eq(1)
+      second_page.next_cursor.should be_nil
+      (first_page.posts + second_page.posts).map(&.id).uniq.size.should eq(3)
+
+      expect_raises(ArgumentError, "invalid archive cursor") do
+        public_posts.archive("not-a-cursor")
+      end
     ensure
       database.close
     end

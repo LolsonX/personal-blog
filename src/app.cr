@@ -189,6 +189,14 @@ get "/" do
   Views.render_home(public_posts.latest)
 end
 
+get "/writing" do |env|
+  begin
+    Views.render_writing_archive(public_posts.archive(env.params.query["cursor"]?))
+  rescue ex : ArgumentError
+    halt env, status_code: 400, response: ex.message
+  end
+end
+
 get "/writing/:slug" do |env|
   slug = env.params.url["slug"]
   if post = public_posts.find(slug)
