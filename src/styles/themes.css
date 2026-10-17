@@ -1,0 +1,23 @@
+/* OS-preference themes: square graph in dark, diagonal facets in light. */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --color-bg: #f4f4f2;
+    --color-text: #161616;
+    --color-muted: #555;
+    --color-faint: #777;
+    --color-line: #d1d1ce;
+    --color-accent: #ce202e;
+    --color-ruby: #ce202e;
+    --color-crystal: #ce202e;
+    --geometry-line: rgba(18, 18, 18, .28);
+    --geometry-red: rgba(206, 32, 46, .82);
+  }
+  body {
+    background-color: var(--color-bg);
+    background-image:
+      linear-gradient(45deg, rgba(0, 0, 0, .035) 1px, transparent 1px),
+      linear-gradient(-45deg, rgba(0, 0, 0, .035) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+}

@@ -1,0 +1,26 @@
+/* Design tokens and defaults. */
+:root {
+  color-scheme: dark;
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  color: #f1f1f1;
+  background: #090909;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --color-bg: #090909;
+  --color-text: #f1f1f1;
+  --color-muted: #a4a4a4;
+  --color-faint: #707070;
+  --color-line: #363636;
+  --color-accent: #ff3542;
+  --color-ruby: #ff3542;
+  --color-crystal: #ff3542;
+  --geometry-line: rgba(241, 241, 241, .5);
+  --geometry-red: rgba(255, 53, 66, .9);
+  --font-body: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-display: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-mono: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --page-width: 1120px;
+  --page-gutter: 32px;
+}

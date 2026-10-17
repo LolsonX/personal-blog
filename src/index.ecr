@@ -3,48 +3,104 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="<%= site_name %> is getting ready.">
-  <title><%= site_name %></title>
-  <style>
-    :root {
-      color-scheme: dark;
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      background: #0c1117;
-      color: #e6edf3;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      min-height: 100vh;
-      margin: 0;
-      display: grid;
-      place-items: center;
-      padding: 2rem;
-      background:
-        linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px),
-        #0c1117;
-      background-size: 32px 32px;
-    }
-
-    main {
-      width: min(42rem, 100%);
-      border-left: 3px solid #ff7a18;
-      padding: 1rem 0 1rem 1.5rem;
-    }
-
-    p { margin: 0 0 .75rem; color: #8b949e; }
-    h1 { margin: 0; font-size: clamp(2rem, 8vw, 5rem); letter-spacing: -.08em; }
-    .status { margin-top: 2rem; color: #ffb86c; }
-    .status::before { content: "> "; color: #3fb950; }
-  </style>
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="<%= site_description %>">
+  <title><%= author_name %> (@<%= handle %>) — <%= site_name %></title>
+  <link rel="stylesheet" href="/styles.css?v=field-journal-5">
 </head>
 <body>
-  <main>
-    <p>Crystal / online</p>
-    <h1><%= site_name %></h1>
-    <p class="status"><%= status %></p>
-  </main>
+  <div class="journal-shell">
+    <header class="masthead">
+      <a class="site-wordmark" href="/" aria-label="core-code.net home">
+        <svg class="site-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path class="site-mark__ruby" d="M16 1 28 8l3 12-15 11L1 20 4 8 16 1Z" />
+          <path class="site-mark__crystal" d="m4 8 12 3 12-3M1 20l15-9 15 9M16 1v10m0 0v20M4 8l12 23M28 8 16 31" />
+        </svg>
+        <span class="site-wordmark__name">core<span class="site-wordmark__separator" aria-hidden="true">·</span>code<span class="site-wordmark__domain">.net</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#writing">Writing</a>
+        <a href="#about">About</a>
+        <a href="<%= github_url %>" target="_blank" rel="me noopener noreferrer">GitHub</a>
+        <a href="<%= twitch_url %>" target="_blank" rel="me noopener noreferrer">Twitch</a>
+      </nav>
+    </header>
+
+    <main class="journal-main">
+      <section class="journal-hero" id="about" aria-labelledby="headline">
+        <svg class="site-backdrop" viewBox="0 0 600 600" aria-hidden="true">
+          <g class="site-backdrop__lines">
+            <path d="M300 30 520 145 565 365 300 570 35 365 80 145 300 30Z" />
+            <path d="m80 145 220 35 220-35M35 365l265-185 265 185M300 30v150m0 390V180M35 365l265 0 265 0M80 145l220 220 220-220M80 145l220 425 220-425" />
+            <path d="m180 93 120 82 120-82M82 255l218 110 218-110M180 455l120-90 120 90" />
+          </g>
+          <path class="site-backdrop__facet" d="m300 30 120 63-120 82-120-82 120-62Z" />
+          <path class="site-backdrop__facet site-backdrop__facet--offset" d="m300 365 265 0-145 90-120-90Z" />
+        </svg>
+        <div class="journal-hero__story">
+          <p class="eyebrow">Field journal <span>/</span> software, play &amp; curiosity</p>
+          <h1 class="display-heading" id="headline">Karol <em>“<%= handle %>”</em><br>Ostrowski</h1>
+          <p class="journal-hero__role"><%= role %></p>
+          <p class="hero__intro"><%= bio %></p>
+          <a class="text-link" href="#writing">Browse the notes <span class="text-link__icon" aria-hidden="true">↘</span></a>
+        </div>
+        <aside class="margin-note" aria-label="A little about Karol">
+          <p class="margin-note__label">The person behind the notes</p>
+          <dl>
+            <div><dt>Practice</dt><dd>Ruby on Rails</dd></div>
+            <div><dt>Currently curious about</dt><dd>Crystal language</dd></div>
+            <div><dt>Off the clock</dt><dd>Games &amp; other worlds</dd></div>
+          </dl>
+          <span class="margin-note__mark" aria-hidden="true">K<span>·</span>O</span>
+        </aside>
+      </section>
+
+      <section class="journal-topics" aria-labelledby="topics-heading">
+        <div class="journal-section-label">
+          <p class="eyebrow">Recurring subjects</p>
+          <h2 class="section-heading" id="topics-heading">What I return to</h2>
+        </div>
+        <div class="topic-list">
+          <article class="topic-entry">
+            <span class="topic-entry__number" aria-hidden="true">01</span>
+            <div>
+              <p class="feature__label">Ruby / daily work</p>
+              <h3 class="feature__title"><%= software_topic_title %></h3>
+              <p class="feature__description"><%= software_topic_description %></p>
+            </div>
+            <span class="topic-entry__arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="topic-entry">
+            <span class="topic-entry__number" aria-hidden="true">02</span>
+            <div>
+              <p class="feature__label">Crystal / exploration</p>
+              <h3 class="feature__title"><%= games_topic_title %></h3>
+              <p class="feature__description"><%= games_topic_description %></p>
+            </div>
+            <span class="topic-entry__arrow" aria-hidden="true">↗</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="journal-writing" id="writing" aria-labelledby="latest-heading">
+        <div class="journal-section-label">
+          <p class="eyebrow">From the notebook</p>
+          <h2 class="section-heading" id="latest-heading">Latest writing</h2>
+        </div>
+        <div class="empty-state">
+          <span class="empty-state__index">ENTRY 001 <span>·</span> SOON</span>
+          <strong class="empty-state__title"><%= first_post_title %></strong>
+          <%= first_post_description %>
+        </div>
+      </section>
+    </main>
+
+    <footer class="journal-footer">
+      <div class="site-footer__inner">
+        <span>© <%= Time.local.year %> <%= author_name %> · <%= site_name %></span>
+        <span><a href="mailto:<%= email %>"><%= email %></a> · <a href="<%= github_url %>" target="_blank" rel="me noopener noreferrer">GitHub</a> · <a href="<%= twitch_url %>" target="_blank" rel="me noopener noreferrer">Twitch</a></span>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
