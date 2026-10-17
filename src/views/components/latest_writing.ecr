@@ -1,5 +1,17 @@
-<div class="empty-state">
-  <span class="empty-state__index">ENTRY 001 <span>·</span> SOON</span>
-  <strong class="empty-state__title"><%= safe_title %></strong>
-  <%= safe_description %>
-</div>
+<% if safe_posts.empty? %>
+  <div class="empty-state">
+    <span class="empty-state__index">ENTRY 001 <span>·</span> SOON</span>
+    <strong class="empty-state__title"><%= safe_empty_title %></strong>
+    <%= safe_empty_description %>
+  </div>
+<% else %>
+  <div class="post-list">
+    <% safe_posts.each do |post| %>
+      <article class="post-list__item">
+        <p class="post-list__meta"><%= post[:published] %><% unless post[:categories].empty? %> <span>·</span> <%= post[:categories] %><% end %></p>
+        <h3 class="post-list__title"><a href="/writing/<%= post[:slug] %>"><%= post[:title] %></a></h3>
+        <% unless post[:summary].empty? %><p class="post-list__summary"><%= post[:summary] %></p><% end %>
+      </article>
+    <% end %>
+  </div>
+<% end %>

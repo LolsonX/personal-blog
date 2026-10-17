@@ -4,3 +4,10 @@
 .empty-state__index { display: block; margin-bottom: 14px; color: var(--color-faint); font-family: var(--font-mono); font-size: .61rem; letter-spacing: .08em; }
 .empty-state__index span { color: var(--color-accent); }
 .empty-state__title { display: block; margin-bottom: 5px; color: var(--color-text); font-size: 1.1rem; font-weight: 500; }
+.post-list__item { padding: 4px 0 24px; border-bottom: 1px solid var(--color-line); }
+.post-list__item + .post-list__item { padding-top: 22px; }
+.post-list__meta { margin: 0 0 8px; color: var(--color-faint); font-family: var(--font-mono); font-size: .62rem; letter-spacing: .04em; }
+.post-list__meta span { color: var(--color-accent); }
+.post-list__title { margin: 0; font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; letter-spacing: -.025em; }
+.post-list__title a { text-decoration: none; }
+.post-list__summary { margin: 8px 0 0; color: var(--color-muted); font-size: .88rem; line-height: 1.7; }

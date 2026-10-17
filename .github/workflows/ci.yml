@@ -26,6 +26,7 @@ jobs:
         run: |
           shards install
           crystal tool format --check
+          crystal spec
           mkdir -p bin
           crystal build --release src/app.cr -o bin/app
           HOST=127.0.0.1 PORT=3100 GIT_SHA=test bin/app > /tmp/app.log 2>&1 &
@@ -36,4 +37,6 @@ jobs:
             sleep 1
           done
           test "$(curl --fail --silent http://127.0.0.1:3100/deployment)" = "test"
-          curl --fail --silent http://127.0.0.1:3100/ | grep -q '<h1>core-code.net</h1>'
+          curl --fail --silent http://127.0.0.1:3100/ | grep -q 'Karol <em>“LolsonX”</em><br>Ostrowski'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:3100/writing/missing-post)" = "404"
+          test "$(curl --fail --silent http://127.0.0.1:3100/health)" = "ok"

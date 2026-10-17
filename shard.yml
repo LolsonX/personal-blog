@@ -7,6 +7,9 @@ targets:
     main: src/app.cr
 
 dependencies:
+  markd:
+    github: icyleaf/markd
+    version: ~> 0.4.2
   kemal:
     github: kemalcr/kemal
     version: ~> 1.13.0

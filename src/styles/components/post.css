@@ -1,0 +1,21 @@
+/* Published post reading view. */
+.journal-main--post { padding-top: clamp(60px, 9vw, 112px); }
+.post-page { max-width: 780px; margin-inline: auto; }
+.post-page__header { padding-bottom: 30px; border-bottom: 1px solid var(--color-line); }
+.post-page__header .eyebrow { margin-bottom: 20px; }
+.post-page__header .display-heading { font-size: clamp(2.4rem, 4.6vw, 3.75rem); }
+.post-page__summary { max-width: 660px; margin: 19px 0 0; color: var(--color-muted); font-size: 1.08rem; line-height: 1.7; }
+.post-page__categories { display: flex; flex-wrap: wrap; gap: 8px; margin: 21px 0 0; padding: 0; list-style: none; }
+.post-page__categories li { padding: 5px 9px; border: 1px solid var(--color-line); color: var(--color-muted); font-size: .72rem; }
+.post-content { padding-top: 26px; color: var(--color-text); font-size: 1.02rem; line-height: 1.85; overflow-wrap: anywhere; }
+.post-content > :first-child { margin-top: 0; }
+.post-content h2, .post-content h3, .post-content h4 { margin: 2em 0 .7em; font-weight: 550; line-height: 1.25; letter-spacing: -.025em; }
+.post-content h2 { font-size: 1.7rem; }
+.post-content h3 { font-size: 1.35rem; }
+.post-content p, .post-content ul, .post-content ol, .post-content blockquote, .post-content pre { margin: 1.25em 0; }
+.post-content a { color: var(--color-accent); }
+.post-content blockquote { margin-inline: 0; padding-left: 18px; border-left: 2px solid var(--color-accent); color: var(--color-muted); }
+.post-content pre { max-width: 100%; padding: 18px; overflow-x: auto; border: 1px solid var(--color-line); background: rgba(255, 255, 255, .035); font-size: .84rem; line-height: 1.65; }
+.post-content code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
+.post-content :not(pre) > code { padding: .12em .32em; border: 1px solid var(--color-line); background: rgba(255, 255, 255, .04); }
+.post-content img { display: block; max-width: 100%; height: auto; }

@@ -16,6 +16,10 @@ shards:
     git: https://github.com/kemalcr/kemal.git
     version: 1.13.0
 
+  markd:
+    git: https://github.com/icyleaf/markd.git
+    version: 0.4.2
+
   radix:
     git: https://github.com/luislavena/radix.git
     version: 0.4.1

@@ -1,0 +1,13 @@
+<article class="post-page">
+  <header class="post-page__header">
+    <p class="eyebrow">Writing <span>/</span> <%= safe_published %></p>
+    <h1 class="display-heading"><%= safe_title %></h1>
+    <% unless safe_summary.empty? %><p class="post-page__summary"><%= safe_summary %></p><% end %>
+    <% unless safe_categories.empty? %>
+      <ul class="post-page__categories" aria-label="Categories">
+        <% safe_categories.each do |category| %><li><%= category %></li><% end %>
+      </ul>
+    <% end %>
+  </header>
+  <div class="post-content"><%= rendered_body %></div>
+</article>
