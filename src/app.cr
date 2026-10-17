@@ -2,33 +2,13 @@ require "kemal"
 require "ecr"
 require "./database"
 require "./site_content"
+require "./views"
 
 DEPLOYED_SHA = ({{ env("GIT_SHA") }} || ENV.fetch("GIT_SHA", "local"))
-STYLESHEET   = {{ read_file("src/styles/tokens.css") + "\n" + read_file("src/styles/base.css") + "\n" + read_file("src/styles/layout.css") + "\n" + read_file("src/styles/components.css") + "\n" + read_file("src/styles/themes.css") }}
-
-def render_index
-  site_name = SiteContent::NAME
-  site_description = SiteContent::DESCRIPTION
-  author_name = SiteContent::AUTHOR_NAME
-  handle = SiteContent::HANDLE
-  role = SiteContent::ROLE
-  bio = SiteContent::BIO
-  email = SiteContent::EMAIL
-  github_url = SiteContent::GITHUB_URL
-  twitch_url = SiteContent::TWITCH_URL
-  software_topic_title = SiteContent::SOFTWARE_TOPIC_TITLE
-  software_topic_description = SiteContent::SOFTWARE_TOPIC_DESCRIPTION
-  games_topic_title = SiteContent::GAMES_TOPIC_TITLE
-  games_topic_description = SiteContent::GAMES_TOPIC_DESCRIPTION
-  first_post_title = SiteContent::FIRST_POST_TITLE
-  first_post_description = SiteContent::FIRST_POST_DESCRIPTION
-  String.build do |io|
-    ECR.embed "src/index.ecr", io
-  end
-end
+STYLESHEET   = {{ read_file("src/styles/tokens.css") + "\n" + read_file("src/styles/base.css") + "\n" + read_file("src/styles/layout.css") + "\n" + read_file("src/styles/components/header.css") + "\n" + read_file("src/styles/components/hero.css") + "\n" + read_file("src/styles/components/profile-note.css") + "\n" + read_file("src/styles/components/topics.css") + "\n" + read_file("src/styles/components/latest-writing.css") + "\n" + read_file("src/styles/components/footer.css") + "\n" + read_file("src/styles/responsive.css") + "\n" + read_file("src/styles/themes.css") }}
 
 get "/" do
-  render_index
+  Views.render_home
 end
 
 get "/styles.css" do |env|

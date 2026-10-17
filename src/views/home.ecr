@@ -1,0 +1,37 @@
+<%= header_html %>
+
+<main class="journal-main">
+  <section class="journal-hero" id="about" aria-labelledby="headline">
+    <svg class="site-backdrop" viewBox="0 0 600 600" aria-hidden="true">
+      <g class="site-backdrop__lines">
+        <path d="M300 30 520 145 565 365 300 570 35 365 80 145 300 30Z" />
+        <path d="m80 145 220 35 220-35M35 365l265-185 265 185M300 30v150m0 390V180M35 365l265 0 265 0M80 145l220 220 220-220M80 145l220 425 220-425" />
+        <path d="m180 93 120 82 120-82M82 255l218 110 218-110M180 455l120-90 120 90" />
+      </g>
+      <path class="site-backdrop__facet" d="m300 30 120 63-120 82-120-82 120-62Z" />
+      <path class="site-backdrop__facet site-backdrop__facet--offset" d="m300 365 265 0-145 90-120-90Z" />
+    </svg>
+    <%= hero_html %>
+    <%= profile_note_html %>
+  </section>
+
+  <section class="journal-topics" aria-labelledby="topics-heading">
+    <div class="journal-section-label">
+      <p class="eyebrow">Recurring subjects</p>
+      <h2 class="section-heading" id="topics-heading">What I return to</h2>
+    </div>
+    <div class="topic-list">
+      <%= topic_entries_html %>
+    </div>
+  </section>
+
+  <section class="journal-writing" id="writing" aria-labelledby="latest-heading">
+    <div class="journal-section-label">
+      <p class="eyebrow">From the notebook</p>
+      <h2 class="section-heading" id="latest-heading">Latest writing</h2>
+    </div>
+    <%= latest_writing_html %>
+  </section>
+</main>
+
+<%= footer_html %>
