@@ -12,24 +12,15 @@
       <path class="site-backdrop__facet site-backdrop__facet--offset" d="m300 365 265 0-145 90-120-90Z" />
     </svg>
     <%= hero_html %>
-    <%= profile_note_html %>
   </section>
 
-  <section class="journal-topics" aria-labelledby="topics-heading">
-    <div class="journal-section-label">
-      <p class="eyebrow">Recurring subjects</p>
-      <h2 class="section-heading" id="topics-heading">What I return to</h2>
-    </div>
-    <div class="topic-list">
-      <%= topic_entries_html %>
-    </div>
+  <section class="journal-interests" aria-labelledby="interests-heading">
+    <h2 class="section-heading" id="interests-heading">Things I’m interested in</h2>
+    <p class="interests-copy"><%= interests_copy %></p>
   </section>
 
   <section class="journal-writing" id="writing" aria-labelledby="latest-heading">
-    <div class="journal-section-label">
-      <p class="eyebrow">From the notebook</p>
-      <h2 class="section-heading" id="latest-heading">Latest writing</h2>
-    </div>
+    <h2 class="section-heading" id="latest-heading">Latest writing</h2>
     <%= latest_writing_html %>
   </section>
 </main>

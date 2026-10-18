@@ -1,9 +1,0 @@
-/* Compact author details beside the hero. */
-.margin-note { position: relative; z-index: 1; margin-bottom: 8px; padding: 0 0 18px 22px; border-left: 1px solid var(--color-line); }
-.margin-note__label { margin: 0 0 23px; color: var(--color-faint); font-family: var(--font-mono); font-size: .62rem; letter-spacing: .1em; line-height: 1.6; text-transform: uppercase; }
-.margin-note dl { margin: 0; }
-.margin-note dl div + div { margin-top: 19px; }
-.margin-note dt { margin-bottom: 4px; color: var(--color-faint); font-family: var(--font-mono); font-size: .6rem; letter-spacing: .06em; text-transform: uppercase; }
-.margin-note dd { margin: 0; color: var(--color-text); font-family: var(--font-display); font-size: 1.03rem; overflow-wrap: anywhere; }
-.margin-note__mark { position: absolute; right: 0; bottom: -19px; color: #3c4539; font-family: var(--font-body); font-size: 2.15rem; font-weight: 300; letter-spacing: -.12em; }
-.margin-note__mark span { color: var(--color-accent); font-size: .65em; }

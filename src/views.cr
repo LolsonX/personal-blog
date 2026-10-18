@@ -17,19 +17,6 @@ module Views
       String.build { |io| ECR.embed "src/views/components/hero.ecr", io }
     end
 
-    def self.profile_note(author_name : String) : String
-      safe_author_name = HTML.escape(author_name)
-      String.build { |io| ECR.embed "src/views/components/profile_note.ecr", io }
-    end
-
-    def self.topic_entry(topic : SiteContent::Topic, index : Int32) : String
-      number = (index + 1).to_s.rjust(2, '0')
-      safe_label = HTML.escape(topic.label)
-      safe_title = HTML.escape(topic.title)
-      safe_description = HTML.escape(topic.description)
-      String.build { |io| ECR.embed "src/views/components/topic_entry.ecr", io }
-    end
-
     def self.latest_writing(posts : Array(Publishing::Post)) : String
       writing_list(posts, SiteContent::FIRST_POST_TITLE, SiteContent::FIRST_POST_DESCRIPTION, true)
     end
@@ -53,7 +40,9 @@ module Views
     def self.post_detail(post : Publishing::Post) : String
       safe_title = HTML.escape(post.title)
       safe_summary = HTML.escape(post.summary)
-      safe_published = HTML.escape(post.first_published_at.not_nil!.to_s("%B %-d, %Y"))
+      published_at = post.first_published_at.not_nil!
+      safe_published = HTML.escape(published_at.to_s("%B %-d, %Y"))
+      safe_published_iso = HTML.escape(published_at.to_s("%Y-%m-%d"))
       safe_categories = post.categories.map { |category| HTML.escape(category.name) }
       rendered_body = Publishing::MarkdownRenderer.render(post.body_markdown)
       String.build { |io| ECR.embed "src/views/components/post_detail.ecr", io }
@@ -76,8 +65,7 @@ module Views
 
     header_html = Components.header(SiteContent::GITHUB_URL, SiteContent::TWITCH_URL)
     hero_html = Components.hero(SiteContent::AUTHOR_GIVEN_NAME, SiteContent::AUTHOR_FAMILY_NAME, SiteContent::HANDLE, SiteContent::ROLE, SiteContent::BIO)
-    profile_note_html = Components.profile_note(SiteContent::AUTHOR_NAME)
-    topic_entries_html = SiteContent::TOPICS.each_with_index.map { |topic, index| Components.topic_entry(topic, index) }.join
+    interests_copy = HTML.escape(SiteContent::INTERESTS)
     latest_writing_html = Components.latest_writing(posts)
     footer_html = Components.footer(SiteContent::AUTHOR_NAME, SiteContent::NAME, SiteContent::EMAIL, SiteContent::GITHUB_URL, SiteContent::TWITCH_URL)
 

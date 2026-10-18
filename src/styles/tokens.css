@@ -14,13 +14,16 @@
   --color-faint: #707070;
   --color-line: #363636;
   --color-accent: #ff3542;
+  --color-accent-hover: #ff5963;
+  --color-on-accent: #090909;
   --color-ruby: #ff3542;
   --color-crystal: #ff3542;
   --geometry-line: rgba(241, 241, 241, .5);
   --geometry-red: rgba(255, 53, 66, .9);
-  --font-body: "Avenir Next", Avenir, "Segoe UI", sans-serif;
-  --font-display: "Avenir Next", Avenir, "Segoe UI", sans-serif;
-  --font-mono: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-sans: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-body: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-sans);
   --page-width: 1120px;
   --page-gutter: 32px;
 }

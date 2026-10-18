@@ -1,4 +1,6 @@
 /* Shared page container and section grid. */
 .journal-shell { position: relative; z-index: 1; width: min(var(--page-width), calc(100% - 2 * var(--page-gutter))); margin-inline: auto; }
 .journal-main { padding-bottom: 100px; }
-.journal-topics, .journal-writing { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1.6fr); gap: clamp(36px, 8vw, 112px); }
+.journal-interests, .journal-writing { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1.6fr); gap: clamp(36px, 8vw, 112px); }
+.journal-interests { grid-template-columns: 1fr; gap: 12px; padding: 40px 0 58px; }
+.journal-writing { padding: 0; }

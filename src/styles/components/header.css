@@ -1,11 +1,11 @@
 /* Site identity and primary navigation. */
-.masthead { min-height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color-line); }
+.masthead { min-height: 82px; display: flex; align-items: center; justify-content: space-between; }
 .site-wordmark { display: inline-flex; align-items: center; gap: 11px; color: var(--color-text); text-decoration: none; }
-.site-wordmark__name { font-family: var(--font-body); font-size: .88rem; font-weight: 650; letter-spacing: -.04em; }
+.site-wordmark__name { font-family: var(--font-body); font-size: .88rem; font-weight: 500; }
 .site-wordmark__separator { display: inline-block; width: .4em; height: .4em; margin: 0 .12em; background: var(--color-accent); font-size: 0; transform: rotate(45deg); vertical-align: .14em; }
 .site-wordmark__domain { margin-left: .12em; color: var(--color-faint); font-size: .76em; font-weight: 400; letter-spacing: 0; }
 .site-mark { width: 26px; height: 26px; overflow: visible; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.15; }
 .site-mark__ruby { stroke: var(--color-ruby); }
 .site-mark__crystal { stroke: var(--color-crystal); }
-.site-nav { display: flex; gap: 29px; color: var(--color-muted); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .015em; }
+.site-nav { display: flex; gap: 29px; color: var(--color-muted); font-family: var(--font-body); font-size: .82rem; }
 .site-nav a { text-decoration: none; }

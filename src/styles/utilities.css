@@ -1,0 +1,19 @@
+/* Small Tailwind-style utility set for reusable layout and action styling. */
+.inline-flex { display: inline-flex; }
+.items-center { align-items: center; }
+.gap-2 { gap: .5rem; }
+.rounded { border-radius: 4px; }
+.border { border: 1px solid; }
+.border-accent { border-color: var(--color-accent); }
+.bg-accent { background-color: var(--color-accent); }
+.text-accent { color: var(--color-accent); }
+.text-on-accent { color: var(--color-on-accent); }
+.px-5 { padding-inline: 1.25rem; }
+.py-3 { padding-block: .75rem; }
+.font-medium { font-weight: 500; }
+.no-underline { text-decoration: none; }
+.transition-colors { transition: background-color 160ms ease, color 160ms ease; }
+.hover\:bg-accent:hover { background-color: var(--color-accent); }
+.hover\:bg-accent-hover:hover { background-color: var(--color-accent-hover); }
+.hover\:text-on-accent:hover { color: var(--color-on-accent); }
+.focus\:outline-accent:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }

@@ -17,7 +17,7 @@ require "./views"
 
 DEPLOYED_SHA = ({{ env("GIT_SHA") }} || ENV.fetch("GIT_SHA", "local"))
 FAVICON      = {{ read_file("src/favicon.svg") }}
-STYLESHEET   = {{ read_file("src/styles/tokens.css") + "\n" + read_file("src/styles/base.css") + "\n" + read_file("src/styles/layout.css") + "\n" + read_file("src/styles/components/header.css") + "\n" + read_file("src/styles/components/hero.css") + "\n" + read_file("src/styles/components/profile-note.css") + "\n" + read_file("src/styles/components/topics.css") + "\n" + read_file("src/styles/components/latest-writing.css") + "\n" + read_file("src/styles/components/post.css") + "\n" + read_file("src/styles/components/admin.css") + "\n" + read_file("src/styles/components/footer.css") + "\n" + read_file("src/styles/responsive.css") + "\n" + read_file("src/styles/themes.css") }}
+STYLESHEET   = {{ read_file("src/styles/tokens.css") + "\n" + read_file("src/styles/utilities.css") + "\n" + read_file("src/styles/base.css") + "\n" + read_file("src/styles/layout.css") + "\n" + read_file("src/styles/components/header.css") + "\n" + read_file("src/styles/components/hero.css") + "\n" + read_file("src/styles/components/interests.css") + "\n" + read_file("src/styles/components/latest-writing.css") + "\n" + read_file("src/styles/components/post.css") + "\n" + read_file("src/styles/components/admin.css") + "\n" + read_file("src/styles/components/footer.css") + "\n" + read_file("src/styles/responsive.css") + "\n" + read_file("src/styles/themes.css") }}
 
 database = Database.connection
 Publishing::Storage::Migrations.apply(database)
