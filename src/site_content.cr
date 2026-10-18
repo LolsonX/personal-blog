@@ -15,7 +15,7 @@ module SiteContent
   GITHUB_URL = "https://github.com/LolsonX"
   TWITCH_URL = "https://www.twitch.tv/LolsonX"
 
-  INTERESTS = "Mostly Ruby on Rails, sometimes Crystal. I also play games and occasionally write about them."
+  INTERESTS = "I’m interested in using software to make complex things in the physical world easier to understand. I mostly stream coding, working through ideas out loud, but sometimes I stream games too."
 
   FIRST_POST_TITLE       = "No posts yet."
   FIRST_POST_DESCRIPTION = "Check back soon."

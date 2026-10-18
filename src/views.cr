@@ -18,10 +18,10 @@ module Views
     end
 
     def self.latest_writing(posts : Array(Publishing::Post)) : String
-      writing_list(posts, SiteContent::FIRST_POST_TITLE, SiteContent::FIRST_POST_DESCRIPTION, true)
+      writing_list(posts, SiteContent::FIRST_POST_TITLE, SiteContent::FIRST_POST_DESCRIPTION)
     end
 
-    def self.writing_list(posts : Array(Publishing::Post), empty_title : String, empty_description : String, archive_link : Bool = false) : String
+    def self.writing_list(posts : Array(Publishing::Post), empty_title : String, empty_description : String) : String
       safe_empty_title = HTML.escape(empty_title)
       safe_empty_description = HTML.escape(empty_description)
       safe_posts = posts.select(&.published?).map do |post|
@@ -32,7 +32,6 @@ module Views
           published: HTML.escape(post.first_published_at.not_nil!.to_s("%B %-d, %Y")),
         }
       end
-      show_archive_link = archive_link && !safe_posts.empty?
       String.build { |io| ECR.embed "src/views/components/latest_writing.ecr", io }
     end
 
@@ -65,6 +64,7 @@ module Views
     hero_html = Components.hero(SiteContent::AUTHOR_GIVEN_NAME, SiteContent::AUTHOR_FAMILY_NAME, SiteContent::HANDLE, SiteContent::ROLE, SiteContent::BIO)
     interests_copy = HTML.escape(SiteContent::INTERESTS)
     latest_writing_html = Components.latest_writing(posts)
+    has_published_posts = posts.any?(&.published?)
     footer_html = Components.footer(SiteContent::AUTHOR_NAME, SiteContent::NAME, SiteContent::EMAIL, SiteContent::GITHUB_URL, SiteContent::TWITCH_URL)
 
     content_html = String.build { |io| ECR.embed "src/views/home.ecr", io }

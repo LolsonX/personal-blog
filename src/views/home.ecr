@@ -20,7 +20,10 @@
   </section>
 
   <section class="journal-writing" id="writing" aria-labelledby="latest-heading">
-    <h2 class="section-heading" id="latest-heading">Latest writing</h2>
+    <div class="journal-writing__heading">
+      <h2 class="section-heading" id="latest-heading">Latest writing</h2>
+      <% if has_published_posts %><a class="journal-writing__archive inline-flex items-center rounded border border-accent text-accent px-4 py-2.5 font-medium no-underline transition-colors hover:bg-accent hover:text-on-accent focus:outline-accent" href="/writing">All posts</a><% end %>
+    </div>
     <%= latest_writing_html %>
   </section>
 </main>
