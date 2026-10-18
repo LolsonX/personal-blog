@@ -1,6 +1,6 @@
 <article class="post-page">
   <header class="post-page__header">
-    <p class="post-page__meta"><time datetime="<%= safe_published_iso %>"><%= safe_published %></time><% unless safe_categories.empty? %> · <%= safe_categories.join(" · ") %><% end %></p>
+    <p class="post-page__meta"><time datetime="<%= safe_published_iso %>"><%= safe_published %></time></p>
     <h1 class="display-heading"><%= safe_title %></h1>
     <% unless safe_summary.empty? %><p class="post-page__summary"><%= safe_summary %></p><% end %>
   </header>

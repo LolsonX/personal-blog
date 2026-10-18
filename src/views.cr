@@ -26,11 +26,10 @@ module Views
       safe_empty_description = HTML.escape(empty_description)
       safe_posts = posts.select(&.published?).map do |post|
         {
-          title:      HTML.escape(post.title),
-          slug:       HTML.escape(post.slug),
-          summary:    HTML.escape(post.summary),
-          published:  HTML.escape(post.first_published_at.not_nil!.to_s("%B %-d, %Y")),
-          categories: post.categories.map { |category| HTML.escape(category.name) }.join(" · "),
+          title:     HTML.escape(post.title),
+          slug:      HTML.escape(post.slug),
+          summary:   HTML.escape(post.summary),
+          published: HTML.escape(post.first_published_at.not_nil!.to_s("%B %-d, %Y")),
         }
       end
       show_archive_link = archive_link && !safe_posts.empty?
@@ -43,7 +42,6 @@ module Views
       published_at = post.first_published_at.not_nil!
       safe_published = HTML.escape(published_at.to_s("%B %-d, %Y"))
       safe_published_iso = HTML.escape(published_at.to_s("%Y-%m-%d"))
-      safe_categories = post.categories.map { |category| HTML.escape(category.name) }
       rendered_body = Publishing::MarkdownRenderer.render(post.body_markdown)
       String.build { |io| ECR.embed "src/views/components/post_detail.ecr", io }
     end

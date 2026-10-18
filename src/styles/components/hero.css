@@ -1,8 +1,8 @@
 /* Introductory profile headline and call to action. */
-.journal-hero { position: relative; display: block; padding: clamp(76px, 11vw, 142px) 0 78px; }
-.journal-hero__story { position: relative; z-index: 1; max-width: 720px; }
-.display-heading { margin: 0; font-family: var(--font-display); font-size: clamp(2.5rem, 4.6vw, 3.8rem); font-weight: 500; line-height: 1.08; overflow-wrap: break-word; }
-.display-heading em { color: var(--color-ruby); font-family: inherit; font-size: 1em; font-style: normal; font-weight: inherit; }
+.journal-hero { position: relative; display: grid; grid-template-columns: minmax(0, 680px) minmax(180px, 1fr); align-items: center; gap: clamp(32px, 6vw, 80px); padding: clamp(64px, 9vw, 118px) 0 36px; }
+.journal-hero__story { position: relative; z-index: 1; grid-column: 1; grid-row: 1; max-width: 680px; }
+.display-heading { margin: 0; font-family: var(--font-display); font-size: clamp(2.4rem, 4.3vw, 3.55rem); font-weight: 500; line-height: 1.08; overflow-wrap: break-word; }
+.display-heading em { color: var(--color-ruby); font-family: inherit; font-size: .94em; font-style: normal; font-weight: inherit; }
 .journal-hero__role { margin: 18px 0 0; color: var(--color-text); font-size: .95rem; }
 .hero__intro { max-width: 590px; margin: 12px 0 0; color: var(--color-muted); font-family: var(--font-body); font-size: 1rem; line-height: 1.7; }
-.text-link { margin-top: 22px; font-family: var(--font-body); font-size: .9rem; }
+.text-link { display: inline-flex; margin-top: 22px; font-family: var(--font-body); font-size: .95rem; }

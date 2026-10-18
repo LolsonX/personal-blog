@@ -1,3 +1,3 @@
 /* Plain copy for the homepage interests section. */
 .section-heading { margin: 0; font-family: var(--font-display); font-size: clamp(1.45rem, 2.2vw, 1.8rem); font-weight: 500; }
-.interests-copy { max-width: 560px; margin: 12px 0 0; color: var(--color-muted); font-size: .98rem; line-height: 1.7; }
+.interests-copy { max-width: 560px; margin: 0; color: var(--color-muted); font-size: .98rem; line-height: 1.7; }

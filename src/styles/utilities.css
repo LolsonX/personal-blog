@@ -8,8 +8,8 @@
 .bg-accent { background-color: var(--color-accent); }
 .text-accent { color: var(--color-accent); }
 .text-on-accent { color: var(--color-on-accent); }
-.px-5 { padding-inline: 1.25rem; }
-.py-3 { padding-block: .75rem; }
+.px-4 { padding-inline: 1rem; }
+.py-2\.5 { padding-block: .625rem; }
 .font-medium { font-weight: 500; }
 .no-underline { text-decoration: none; }
 .transition-colors { transition: background-color 160ms ease, color 160ms ease; }

@@ -19,5 +19,5 @@
 .post-content img { display: block; max-width: 100%; height: auto; }
 .journal-main--archive { padding-top: clamp(60px, 9vw, 112px); }
 .writing-archive { max-width: 780px; margin-inline: auto; }
-.archive-pagination { display: flex; justify-content: flex-end; margin-top: 30px; }
-.archive-pagination__next { color: var(--color-text); font-size: .88rem; }
+.archive-pagination { display: flex; justify-content: flex-end; margin-top: 22px; }
+.archive-pagination__next { color: var(--color-accent); font-size: .9rem; }

@@ -4,14 +4,14 @@
     <%= safe_empty_description %>
   </div>
 <% else %>
-  <div class="post-list">
+  <div class="post-list<%= safe_posts.size > 1 ? " post-list--columns" : "" %>">
     <% safe_posts.each do |post| %>
       <article class="post-list__item">
-        <p class="post-list__meta"><%= post[:published] %><% unless post[:categories].empty? %> · <%= post[:categories] %><% end %></p>
+        <p class="post-list__meta"><%= post[:published] %></p>
         <h3 class="post-list__title"><a href="/writing/<%= post[:slug] %>"><%= post[:title] %></a></h3>
         <% unless post[:summary].empty? %><p class="post-list__summary"><%= post[:summary] %></p><% end %>
       </article>
     <% end %>
   </div>
-  <% if show_archive_link %><p class="post-list__more"><a class="inline-flex items-center rounded border border-accent text-accent px-5 py-3 font-medium no-underline transition-colors hover:bg-accent hover:text-on-accent focus:outline-accent" href="/writing">All posts</a></p><% end %>
+  <% if show_archive_link %><p class="post-list__more"><a class="inline-flex items-center rounded border border-accent text-accent px-4 py-2.5 font-medium no-underline transition-colors hover:bg-accent hover:text-on-accent focus:outline-accent" href="/writing">All posts</a></p><% end %>
 <% end %>

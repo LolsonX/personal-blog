@@ -4,7 +4,7 @@
     color-scheme: light;
     --color-bg: #f4f4f2;
     --color-text: #161616;
-    --color-muted: #555;
+    --color-muted: #4b4b4b;
     --color-faint: #777;
     --color-line: #d1d1ce;
     --color-accent: #ce202e;
@@ -17,8 +17,10 @@
   body {
     background-color: var(--color-bg);
     background-image:
-      linear-gradient(45deg, rgba(0, 0, 0, .035) 1px, transparent 1px),
-      linear-gradient(-45deg, rgba(0, 0, 0, .035) 1px, transparent 1px);
-    background-size: 72px 72px;
+      linear-gradient(to bottom, transparent 35rem, var(--color-bg) 78rem),
+      linear-gradient(45deg, rgba(0, 0, 0, .015) 1px, transparent 1px),
+      linear-gradient(-45deg, rgba(0, 0, 0, .015) 1px, transparent 1px);
+    background-size: auto, 72px 72px, 72px 72px;
+    background-repeat: no-repeat, repeat, repeat;
   }
 }

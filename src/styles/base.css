@@ -9,15 +9,17 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   background-image:
-    linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(to bottom, transparent 35rem, var(--color-bg) 78rem),
+    linear-gradient(rgba(255, 255, 255, .008) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .008) 1px, transparent 1px);
+  background-size: auto, 64px 64px, 64px 64px;
+  background-repeat: no-repeat, repeat, repeat;
 }
 a { color: inherit; text-decoration-color: #687061; text-underline-offset: .25em; }
 a:hover { color: var(--color-accent); }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
 
-.site-backdrop { position: absolute; z-index: 0; top: 12%; right: 8%; width: clamp(120px, 14vw, 160px); height: auto; overflow: visible; opacity: .95; filter: drop-shadow(0 0 12px rgba(255, 53, 66, .16)); pointer-events: none; }
+.site-backdrop { position: relative; z-index: 0; grid-column: 2; grid-row: 1; justify-self: center; width: clamp(180px, 19vw, 220px); height: auto; overflow: visible; opacity: .5; pointer-events: none; }
 .site-backdrop__lines { fill: none; stroke: var(--geometry-line); stroke-width: 1.15; vector-effect: non-scaling-stroke; }
 .site-backdrop__facet { fill: var(--geometry-red); opacity: .36; }
 .site-backdrop__facet--offset { opacity: .18; }
